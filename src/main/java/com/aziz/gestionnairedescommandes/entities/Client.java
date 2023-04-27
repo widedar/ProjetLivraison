@@ -3,11 +3,12 @@ package com.aziz.gestionnairedescommandes.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Data
-public class Client {
+public class Client implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int Id;
@@ -19,18 +20,14 @@ public class Client {
     private String adresse;
 
     private String phone;
-    private String email;
-    private String pass;
-    private Boolean isConnected;
+    
 
-    public Client(String nom, String prenom, String adresse,String phone,String email,String pass,Boolean isConnected) {
+    public Client(String nom, String prenom, String adresse,String phone) {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.phone=phone;
-        this.email=email;
-        this.pass=pass;
-        this.isConnected=isConnected;
+        
     }
     @OneToMany(mappedBy = "client")
     private List<Commande> commandes;
@@ -40,8 +37,56 @@ public class Client {
         prenom =" ";
         adresse= " ";
         phone =" ";
-        email=" ";
-        pass=" ";
-        isConnected = false;
+        
     }
+
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+
+	public List<Commande> getCommandes() {
+		return commandes;
+	}
+
+	public void setCommandes(List<Commande> commandes) {
+		this.commandes = commandes;
+	}
+    
 }
